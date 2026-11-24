@@ -248,6 +248,138 @@
             background: #D4AF37;
             border-radius: 4px;
         }
+		
+		/* MOBILE RESPONSIVE CENTER ALIGNMENT FIX */
+		* {
+			box-sizing: border-box;
+		}
+
+		html, body {
+			width: 100%;
+			max-width: 100%;
+			margin: 0;
+			padding: 0;
+			overflow-x: hidden;
+		}
+
+		body {
+			position: relative;
+		}
+
+		main {
+			width: 100%;
+			max-width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		section {
+			width: 100%;
+			max-width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		img {
+			max-width: 100%;
+		}
+		
+		/* LOTUS GATE MOBILE FIX */
+		#lotusGateOverlay {
+			width: 100%;
+			max-width: 100vw;
+			padding-left: 12px;
+			padding-right: 12px;
+			overflow: hidden;
+		}
+
+		#lotusAssembly {
+			width: min(90vw, 380px);
+			height: min(90vw, 380px);
+			flex-shrink: 0;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.lotus-petal {
+			max-width: 42vw;
+		}
+		
+		/* PETAL DECK MOBILE ALIGNMENT */
+		.petal-deck-container {
+			width: 100%;
+			max-width: 380px;
+			margin: 0 auto;
+			padding: 0;
+		}
+
+		.petal-card {
+			width: 100%;
+			max-width: 100%;
+			padding: 1.2rem;
+		}
+
+		@media (max-width: 480px) {
+			.petal-card[data-pos="-1"] {
+				transform: translate3d(-12px, 15px, 20px)
+						   rotateZ(-5deg) scale(0.94);
+			}
+
+			.petal-card[data-pos="1"] {
+				transform: translate3d(12px, 15px, 20px)
+						   rotateZ(5deg) scale(0.94);
+			}
+
+			.petal-card[data-pos="-2"] {
+				transform: translate3d(-20px, 30px, -30px)
+						   rotateZ(-8deg) scale(0.88);
+			}
+
+			.petal-card[data-pos="2"] {
+				transform: translate3d(20px, 30px, -30px)
+						   rotateZ(8deg) scale(0.88);
+			}
+		}
+		
+		@media (max-width: 480px) {
+			section {
+				padding-left: 14px !important;
+				padding-right: 14px !important;
+			}
+
+			.max-w-5xl,
+			.max-w-4xl,
+			.max-w-3xl {
+				width: 100%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+		
+		/* HERO INVITATION FRAME */
+		#hero .relative.w-64 {
+			width: min(80vw, 320px);
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		@media (max-width: 480px) {
+			.perspective-1000,
+			.perspective-1500 {
+				perspective: 1000px;
+				transform-style: preserve-3d;
+				max-width: 100%;
+			}
+
+			#carouselTouchContainer,
+			#scrollCard,
+			#reception {
+				width: 100%;
+				margin-left: auto;
+				margin-right: auto;
+			}
+		}
+		
     </style>
 </head>
 <body class="relative min-h-screen text-espresso-900 antialiased overflow-hidden bg-plum-950" id="bodyElement">
