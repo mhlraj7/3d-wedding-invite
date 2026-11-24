@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isha Kumari & Ajay Kumar — Matrimonial Invitation</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        plum: {
+                            950: '#2A0613',
+                            900: '#4A0E24',
+                            800: '#6E1F2F',
+                            700: '#8C253B',
+                            100: '#FBE8ED'
+                        },
+                        gold: {
+                            100: '#FDF8E2',
+                            300: '#F3E5AB',
+                            500: '#D4AF37',
+                            600: '#B89228',
+                            700: '#96731C'
+                        },
+                        espresso: {
+                            950: '#120D0C',
+                            900: '#1E1614',
+                            800: '#332724',
+                            600: '#5E4C47'
+                        },
+                        pearl: '#FFFDF9',
+                        parchment: '#F6EFE5'
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'Georgia', 'serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                        script: ['Great Vibes', 'cursive']
+                    },
+                    animation: {
+                        'float-3d': 'float3D 5s ease-in-out infinite',
+                        'pulse-gold': 'pulseGold 2.5s ease-in-out infinite',
+                        'spin-slow': 'spin 40s linear infinite',
+                        'shimmer': 'shimmer 3s infinite linear'
+                    },
+                    keyframes: {
+                        float3D: {
+                            '0%, 100%': { transform: 'translateY(0px) rotateX(0deg)' },
+                            '50%': { transform: 'translateY(-10px) rotateX(4deg)' }
+                        },
+                        pulseGold: {
+                            '0%, 100%': { filter: 'drop-shadow(0 0 8px rgba(212, 175, 55, 0.4))' },
+                            '50%': { filter: 'drop-shadow(0 0 22px rgba(212, 175, 55, 0.8))' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Great+Vibes&family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        body {
+            background-color: #2A0613;
+            color: #1E1614;
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Perspective Engine for 3D Layering */
+        .perspective-1000 {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        .perspective-1500 {
+            perspective: 1500px;
+            transform-style: preserve-3d;
+        }
+
+        /* Opaque High-Contrast Card Base */
+        .pearl-card {
+            background-color: #FFFDF9;
+            border: 2px solid #D4AF37;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .dark-plum-card {
+            background-color: #4A0E24;
+            border: 2px solid #D4AF37;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        /* 3D LOTUS PETAL GATE ARCHITECTURE */
+        #lotusGateOverlay {
+            transition: opacity 1.2s ease, transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            transform-style: preserve-3d;
+        }
+        .gate-bloomed {
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(2.2) rotateZ(15deg);
+        }
+
+        .lotus-petal {
+            position: absolute;
+			left: 50%;
+			top: 50%;
+            width: 140px;
+            height: 220px;
+			margin-left: -70px;
+			margin-top: -220px;
+            background: linear-gradient(135deg, #6E1F2F 0%, #4A0E24 70%, #2A0613 100%);
+            border: 2px solid #D4AF37;
+            border-radius: 120px 120px 20px 20px;
+            transform-origin: bottom center;
+            transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.8s ease;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6), inset 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .lotus-petal {
+                width: 180px;
+                height: 280px;
+				margin-left: -90px;
+				margin-top: -280px;
+            }
+        }
+
+        /* PETAL DECK STACK 3D ANIMATION */
+        .petal-deck-container {
+            position: relative;
+            height: 480px;
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+            transform-style: preserve-3d;
+        }
+
+        @media (min-width: 640px) {
+            .petal-deck-container {
+                max-width: 460px;
+                height: 520px;
+            }
+        }
+
+        .petal-card {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 40px 40px 24px 24px;
+            transform-origin: bottom center;
+            transition: transform 0.7s cubic-bezier(0.34, 1.36, 0.64, 1), opacity 0.6s ease, box-shadow 0.6s ease;
+            backface-visibility: hidden;
+            border: 2px solid #D4AF37;
+            background: #FFFDF9;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem;
+        }
+
+        /* 3D Petal Deck Stacking Positions */
+        .petal-card[data-pos="0"] {
+            transform: translate3d(0, 0, 60px) rotateZ(0deg) scale(1);
+            z-index: 30;
+            opacity: 1;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5), 0 0 20px rgba(212,175,55,0.4);
+        }
+        .petal-card[data-pos="-1"] {
+            transform: translate3d(-45px, 20px, 20px) rotateZ(-10deg) rotateY(12deg) scale(0.92);
+            z-index: 20;
+            opacity: 0.85;
+            cursor: pointer;
+        }
+        .petal-card[data-pos="1"] {
+            transform: translate3d(45px, 20px, 20px) rotateZ(10deg) rotateY(-12deg) scale(0.92);
+            z-index: 20;
+            opacity: 0.85;
+            cursor: pointer;
+        }
+        .petal-card[data-pos="-2"] {
+            transform: translate3d(-80px, 45px, -30px) rotateZ(-18deg) rotateY(20deg) scale(0.84);
+            z-index: 10;
+            opacity: 0.65;
+            cursor: pointer;
+        }
+        .petal-card[data-pos="2"] {
+            transform: translate3d(80px, 45px, -30px) rotateZ(18deg) rotateY(-20deg) scale(0.84);
+            z-index: 10;
+            opacity: 0.65;
+            cursor: pointer;
+        }
+
+        /* ORIGAMI 3D SCROLL PAPER */
+        .origami-scroll-paper {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform-origin: top center;
+            transform: rotateX(-90deg);
+            transition: max-height 1s cubic-bezier(0.4, 0, 0.2, 1), transform 0.9s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.7s ease;
+        }
+        .scroll-open .origami-scroll-paper {
+            max-height: 950px;
+            opacity: 1;
+            transform: rotateX(0deg);
+        }
+
+        /* Shimmer Gold Text Effect */
+        .gold-shimmer-text {
+            background: linear-gradient(90deg, #D4AF37 0%, #FFFDF9 50%, #D4AF37 100%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmer 4s infinite linear;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2A0613;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="relative min-h-screen text-espresso-900 antialiased overflow-hidden bg-plum-950" id="bodyElement">
+
+    <!-- Petal & Gold Dust Canvas -->
+    <canvas id="petalCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Floating Toast Notifications -->
+    <div id="toastContainer" class="fixed top-6 right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Floating Audio Equalizer Control -->
+    <div class="fixed bottom-6 right-6 z-40">
+        <button id="audioToggleBtn" onclick="toggleAudio()" class="pearl-card px-4 py-3 rounded-full text-plum-900 hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl flex items-center gap-3 border-2 border-gold-500 cursor-pointer">
+            <div id="equalizerBars" class="flex items-end gap-1 h-4 w-4">
+                <span class="w-1 bg-plum-800 rounded-full h-2 animate-pulse"></span>
+                <span class="w-1 bg-gold-500 rounded-full h-4 animate-pulse" style="animation-delay: 0.2s"></span>
+                <span class="w-1 bg-plum-700 rounded-full h-3 animate-pulse" style="animation-delay: 0.4s"></span>
+            </div>
+            <span class="text-xs font-bold tracking-wider uppercase text-espresso-900 font-cinzel">
+                Music
+            </span>
+        </button>
+    </div>
+
+    <!-- Audio Element with Fallbacks -->
+    <audio id="weddingAudio" loop preload="auto">
+        <source src="Hawayein - Jab Harry Met Sejal (Arijit Singh) 320Kbps.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=flute-ambient-11234.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ============================================================== -->
+    <!-- 1. 3D BLOOMING LOTUS SEAL GATE (OPENING EXPERIENCE)             -->
+    <!-- ============================================================== -->
+    <div id="lotusGateOverlay" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-6 bg-gradient-to-b from-plum-950 via-plum-900 to-plum-950 overflow-hidden perspective-1000">
+        
+        <!-- Soft Ambient Background Photo Scrim -->
+        <div class="absolute inset-0 z-0 opacity-25">
+            <img src="IMG_20250921_141323.jpg" 
+                 onerror="this.onerror=null; this.src='https://placehold.co/1200x1600/4A0E24/D4AF37?text=Isha+%26+Ajay';" 
+                 class="w-full h-full object-cover filter blur-md scale-110" alt="Couple Backdrop">
+            <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-plum-900/80 to-plum-950"></div>
+        </div>
+
+        <!-- Header Motto -->
+        <div class="relative z-20 text-center space-y-2 mb-8">
+            <p class="text-xs font-bold uppercase tracking-[0.4em] text-gold-300 font-cinzel">|| ॐ श्री गणेशाय नमः ||</p>
+            <p class="text-[11px] font-medium tracking-[0.3em] uppercase text-gold-100/80">Matrimonial Announcement</p>
+        </div>
+
+        <!-- 3D Blooming Lotus Petals Assembly -->
+        <div class="relative w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 flex items-center justify-center z-10 my-4 perspective-1000" id="lotusAssembly">
+            
+            <!-- 8 Fanning 3D Petals -->
+            <div class="lotus-petal text-center p-3 flex flex-col justify-between" style="transform: rotate(0deg) translateY(-85px) rotateX(15deg);">
+                <span class="text-[9px] text-gold-300 font-cinzel tracking-widest uppercase">Shubh</span>
+            </div>
+            <div class="lotus-petal text-center p-3 flex flex-col justify-between" style="transform: rotate(45deg) translateY(-85px) rotateX(15deg);">
+                <span class="text-[9px] text-gold-300 font-cinzel tracking-widest uppercase">Vivah</span>
+            </div>
+            <div class="lotus-petal text-center p-3 flex flex-col justify-between" style="transform: rotate(90deg) translateY(-85px) rotateX(15deg);">
+                <span class="text-[9px] text-gold-300 font-cinzel tracking-widest uppercase">Love</span>
+            </div>
+            <div class="lotus-petal text-center p-3 flex flex-col justify-between" style="transform: rotate(135deg) translateY(-85px) rotateX(15deg);">
+                <span class="text-[9px] text-gold-300 font-cinzel tracking-widest uppercase">Joy</span>
+            </div>
+            <div class="lotus-petal text-center p-3 flex flex-col justify-between" style="transform: rotate(180deg) translateY(-85px) rotateX(15deg);">
+                <span class="text-[9px] text-gold-300 font-cinzel tracking-widest uppercase">Kalyan</span>
+            </div>
+            <div class="lotus-petal text-center p-3 flex flex-col justify-between" style="transform: rotate(225deg) translateY(-85px) rotateX(15deg);">
+                <span class="text-[9px] text-gold-300 font-cinzel tracking-widest uppercase">Grace</span>
+            </div>
+            <div class="lotus-petal text-center p-3 flex flex-col justify-between" style="transform: rotate(270deg) translateY(-85px) rotateX(15deg);">
+                <span class="text-[9px] text-gold-300 font-cinzel tracking-widest uppercase">Union</span>
+            </div>
+            <div class="lotus-petal text-center p-3 flex flex-col justify-between" style="transform: rotate(315deg) translateY(-85px) rotateX(15deg);">
+                <span class="text-[9px] text-gold-300 font-cinzel tracking-widest uppercase">Blessing</span>
+            </div>
+
+            <!-- Lotus Center Medallion (Interactive Button) -->
+            <button onclick="bloomLotusGate()" id="lotusCenterBtn" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 w-36 h-36 sm:w-44 sm:h-44
+			rounded-full bg-gradient-to-br from-gold-300
+			via-gold-500 to-gold-700 p-1
+			shadow-[0_0_50px_rgba(212,175,55,0.7)]
+			hover:scale-105 active:scale-95
+			transition-all duration-300 group cursor-pointer">
+                <div class="w-full h-full rounded-full bg-plum-900 border-2 border-gold-300 flex flex-col items-center justify-center p-4 text-center">
+                    <!-- Elegant Gold Lord Ganesha Emblem -->
+					<div class="w-16 h-16 mb-1 animate-pulse-gold">
+						<svg
+							class="w-full h-full drop-shadow-md"
+							viewBox="0 0 100 100"
+							fill="none"
+							aria-label="Minimal Lord Ganesha emblem"
+							role="img">
+							<g fill="none" stroke="#D4AF37" stroke-width="4"
+							   stroke-linecap="round" stroke-linejoin="round">
+								<path d="M39 34 C28 20 14 23 13 39 C12 51 23 59 36 56" />
+								<path d="M61 34 C72 20 86 23 87 39 C88 51 77 59 64 56" />
+								<path d="M35 35 C35 22 42 15 50 15 C58 15 65 22 65 35 C65 54 61 62 56 67" />
+								<path d="M36 57 C31 60 29 66 33 70 C37 73 41 68 42 64" />
+								<path d="M64 57 C69 60 71 66 67 70 C63 73 59 68 58 64" />
+								<path d="M50 49 C50 60 49 66 43 71 C38 75 39 83 47 84 C56 85 63 78 59 71" />
+								<path d="M41 43 Q44 46 47 43 M53 43 Q56 46 59 43" />
+								<path d="M50 23 L50 32 M46 29 Q50 33 54 29" stroke-width="3" />
+							</g>
+						</svg>
+					</div>
+                    <span class="font-cinzel text-xs font-bold uppercase text-gold-300 tracking-wider">Tap To Bloom</span>
+                    <span class="font-script text-xl text-gold-100 font-normal mt-0.5">Invitation</span>
+                </div>
+            </button>
+        </div>
+
+        <!-- Couple Title -->
+        <div class="relative z-20 text-center space-y-1 mt-6">
+            <h1 class="font-cinzel text-2xl md:text-4xl font-extrabold text-gold-300 tracking-wide">
+                Isha Kumari & Ajay Kumar
+            </h1>
+            <p class="text-xs font-semibold text-gold-100/90 tracking-widest uppercase">
+                07 December 2026 • Ranchi, India
+            </p>
+        </div>
+    </div>
+
+
+    <!-- ============================================================== -->
+    <!-- MAIN CONTENT CONTAINER                                         -->
+    <!-- ============================================================== -->
+    <main id="mainContent" class="relative z-10 opacity-0 transition-opacity duration-1000 pointer-events-none">
+        
+        <!-- ----------------------------------------------------------- -->
+        <!-- 2. HERO PAGE (100dvh Centered Scalloped Arch Frame)         -->
+        <!-- ----------------------------------------------------------- -->
+        <section id="hero" class="min-h-screen min-h-[100dvh] flex flex-col justify-center items-center relative px-6 py-12 text-center bg-gradient-to-b from-plum-950 via-plum-900 to-plum-950 overflow-hidden">
+            
+            <div class="max-w-3xl mx-auto space-y-6 relative z-10">
+                <!-- Header Lines -->
+                <div class="space-y-1">
+                    <p class="text-xs font-bold uppercase tracking-[0.4em] text-gold-300 font-cinzel">|| ॐ श्री गणेशाय नमः ||</p>
+                    <p class="text-xs uppercase tracking-[0.25em] text-gold-100 font-semibold pt-1">Together with their families</p>
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-gold-300/90 font-medium">Cordially solicit your gracious presence at the wedding of</p>
+                </div>
+
+                <!-- Scalloped Gold Arch Frame with Photo #1 & Opaque Scrim -->
+                <div class="relative w-64 h-80 sm:w-72 sm:h-96 md:w-80 md:h-[430px] mx-auto rounded-t-full border-4 border-gold-500 p-2 shadow-[0_20px_50px_rgba(0,0,0,0.8)] bg-plum-900 overflow-hidden group">
+                    <div class="w-full h-full rounded-t-full overflow-hidden relative">
+                        <!-- Photo 1 Background -->
+                        <img src="IMG_20250921_141323.jpg" 
+                            onerror="this.src='https://placehold.co/600x800/6e1f2f/D4AF37?text=Isha+%26+Ajay'"
+                            alt="Couple Background" 
+                            class="w-full h-full object-cover opacity-25 scale-105 animate-[zoomSlow_20s_infinite_alternate] filter blur-[2px]" />
+                        
+                        <!-- High-Contrast Pearl Opaque Scrim -->
+                        <div class="absolute inset-0 bg-[#FFFDF9]/94 backdrop-blur-xs flex flex-col items-center justify-center p-5 text-center border-t-2 border-gold-500">
+                            <!-- Small Ganesha Crest -->
+                            <div class="w-12 h-12 mb-1">
+                                <svg
+									class="w-full h-full drop-shadow-md"
+									viewBox="0 0 100 100"
+									fill="none"
+									aria-label="Minimal Lord Ganesha emblem"
+									role="img">
+									<g fill="none" stroke="#D4AF37" stroke-width="4"
+									   stroke-linecap="round" stroke-linejoin="round">
+										<path d="M39 34 C28 20 14 23 13 39 C12 51 23 59 36 56" />
+										<path d="M61 34 C72 20 86 23 87 39 C88 51 77 59 64 56" />
+										<path d="M35 35 C35 22 42 15 50 15 C58 15 65 22 65 35 C65 54 61 62 56 67" />
+										<path d="M36 57 C31 60 29 66 33 70 C37 73 41 68 42 64" />
+										<path d="M64 57 C69 60 71 66 67 70 C63 73 59 68 58 64" />
+										<path d="M50 49 C50 60 49 66 43 71 C38 75 39 83 47 84 C56 85 63 78 59 71" />
+										<path d="M41 43 Q44 46 47 43 M53 43 Q56 46 59 43" />
+										<path d="M50 23 L50 32 M46 29 Q50 33 54 29" stroke-width="3" />
+									</g>
+								</svg>
+                            </div>
+                            
+                            <span class="text-[10px] font-extrabold uppercase tracking-[0.3em] text-gold-700">The Wedding Union</span>
+							
+							<!-- Bride -->
+                            <h2 class="font-cinzel text-3xl md:text-4xl text-gold-100 font-extrabold">Isha Kumari</h2>
+                            <p class="text-xs text-gold-100/80 font-medium pt-1">
+                                Daughter of <br><span class="text-xs text-gold-100/80 font-medium pt-1">Ghumeshwar Mahto</span> & <span class="text-xs text-gold-100/80 font-medium pt-1">Lalita Devi</span>
+                            </p>                            
+                            
+                            <div class="my-1 flex items-center gap-2">
+                                <span class="h-[1px] w-6 bg-gold-500"></span>
+                                <span class="font-script text-3xl text-gold-700">&</span>
+                                <span class="h-[1px] w-6 bg-gold-500"></span>
+                            </div>
+
+                            <!-- Groom -->
+                            <h2 class="font-cinzel text-3xl md:text-4xl text-gold-100 font-extrabold">Ajay Kumar</h2>
+                            <p class="text-xs text-gold-100/80 font-medium pt-1">
+                                Son of <br><span class="text-xs text-gold-100/80 font-medium pt-1">Heeralal Mahto</span> & <span class="text-xs text-gold-100/80 font-medium pt-1">Sheela Prabha Devi</span>
+                            </p>
+							
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quote & Date -->
+                <div class="space-y-3 max-w-lg mx-auto">
+                    <p class="font-playfair italic text-sm md:text-base text-gold-300 font-medium py-2 border-y border-gold-500/40">
+                        "Bound by love, blessed by family, united forever under the sacred fire."
+                    </p>
+                    <p class="text-xs font-bold text-gold-100 tracking-[0.25em] uppercase">
+                        Monday, 07 December 2026 • Panchouli, Ranchi
+                    </p>
+                </div>
+
+                <!-- 3D Scroll Down Indicator -->
+                <div class="pt-2 animate-float-3d">
+                    <a href="#save-the-date" class="inline-flex flex-col items-center gap-1 text-gold-300 hover:text-gold-100 transition group">
+                        <span class="text-[10px] font-cinzel uppercase tracking-[0.3em]">Unfold Save The Date</span>
+                        <div class="w-8 h-8 rounded-full border border-gold-500 flex items-center justify-center bg-plum-900/80 shadow">
+                            <i class="fas fa-chevron-down text-xs text-gold-300 group-hover:translate-y-0.5 transition-transform"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ----------------------------------------------------------- -->
+        <!-- 3. SAVE THE DATE (3D ORIGAMI FAN-OUT PARCHMENT SCROLL)     -->
+        <!-- ----------------------------------------------------------- -->
+        <section id="save-the-date" class="py-20 px-6 max-w-4xl mx-auto perspective-1500">
+            <div class="text-center mb-10 space-y-1">
+                <span class="text-xs font-extrabold tracking-[0.35em] uppercase text-gold-300 font-cinzel">Auspicious Moment</span>
+                <h3 class="font-cinzel text-3xl md:text-4xl text-gold-100 font-extrabold">Save The Date</h3>
+            </div>
+
+            <!-- Origami 3D Fan Scroll Container -->
+            <div id="scrollCard" onclick="toggleOrigamiScroll()" class="pearl-card rounded-3xl border-2 border-gold-500 shadow-[0_25px_60px_rgba(0,0,0,0.6)] cursor-pointer group transition-all duration-500 overflow-hidden">
+                
+                <!-- Gold Wax-Sealed Fan Handle Bar -->
+                <div class="bg-gradient-to-r from-plum-950 via-plum-800 to-plum-950 text-gold-100 px-6 py-5 flex items-center justify-between border-b-2 border-gold-500 shadow-lg">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-gold-300 to-gold-600 text-plum-950 flex items-center justify-center font-bold shadow-md border border-gold-300">
+                            <i class="fas fa-fan text-base animate-spin-slow"></i>
+                        </div>
+						
+                        <div>
+                            <span class="text-[15px] text-gold-100/90 font-medium">Tap to unfold official vivah muhurat</span>
+                            <!--span class="text-[11px] text-gold-100/90 font-medium">Tap to unfold official vivah muhurat</span-->
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-gold-300 uppercase tracking-wider hidden sm:inline font-cinzel">Unfold</span>
+                        <i id="scrollChevron" class="fas fa-chevron-down text-sm text-gold-300 transition-transform duration-500"></i>
+                    </div>
+                </div>
+
+                <!-- Unfolding Origami Parchment Body -->
+                <div id="scrollPaperBody" class="origami-scroll-paper text-center space-y-6 px-6 bg-[#FFFDF9]">
+                    <div class="pt-6 space-y-2">
+                        <div class="text-xs font-extrabold text-plum-800 tracking-[0.3em] uppercase font-cinzel">Main Wedding Ceremony</div>
+                        <h4 class="font-cinzel text-3xl md:text-5xl font-extrabold text-plum-900">Monday, 07 · 12 · 2026</h4>
+                        
+                        <div class="inline-block mt-2 px-5 py-2 rounded-full bg-plum-100 border border-plum-800/30 text-plum-900 font-bold text-xs tracking-wider">
+                            <i class="far fa-clock text-plum-800 mr-1.5"></i> Sacred Pheras Muhurat at 12:00 PM IST
+                        </div>
+                    </div>
+
+                    <!-- Live Countdown Ticker -->
+                    <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto pt-2">
+                        <div class="bg-parchment p-3 rounded-2xl border border-gold-500/60 shadow-inner">
+                            <span id="cd-days" class="font-cinzel text-2xl md:text-4xl font-extrabold text-plum-900 block">00</span>
+                            <span class="text-[10px] font-extrabold tracking-wider text-espresso-900 uppercase">Days</span>
+                        </div>
+                        <div class="bg-parchment p-3 rounded-2xl border border-gold-500/60 shadow-inner">
+                            <span id="cd-hours" class="font-cinzel text-2xl md:text-4xl font-extrabold text-plum-900 block">00</span>
+                            <span class="text-[10px] font-extrabold tracking-wider text-espresso-900 uppercase">Hours</span>
+                        </div>
+                        <div class="bg-parchment p-3 rounded-2xl border border-gold-500/60 shadow-inner">
+                            <span id="cd-mins" class="font-cinzel text-2xl md:text-4xl font-extrabold text-plum-900 block">00</span>
+                            <span class="text-[10px] font-extrabold tracking-wider text-espresso-900 uppercase">Mins</span>
+                        </div>
+                        <div class="bg-parchment p-3 rounded-2xl border border-gold-500/60 shadow-inner">
+                            <span id="cd-secs" class="font-cinzel text-2xl md:text-4xl font-extrabold text-plum-900 block">00</span>
+                            <span class="text-[10px] font-extrabold tracking-wider text-espresso-900 uppercase">Secs</span>
+                        </div>
+                    </div>
+
+                    <!-- Google Calendar Action Button -->
+                    <div class="pt-2 pb-4">
+                        <button onclick="addToCalendar(event)" class="px-7 py-3.5 rounded-full bg-gradient-to-r from-plum-900 to-plum-800 text-gold-100 font-bold text-xs tracking-widest uppercase hover:brightness-110 transition shadow-xl flex items-center justify-center gap-3 mx-auto border-2 border-gold-500 cursor-pointer">
+                            <i class="far fa-calendar-plus text-sm text-gold-300"></i>
+                            Add To Google Calendar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ----------------------------------------------------------- -->
+        <!-- 4. WEDDING FESTIVITIES — 3D STACKED BLOOMING PETAL CARDS    -->
+        <!-- ----------------------------------------------------------- -->
+        <section id="festivities" class="py-20 px-6 max-w-5xl mx-auto perspective-1500">
+            <div class="text-center mb-10 space-y-1">
+                <span class="text-xs font-extrabold tracking-[0.35em] uppercase text-gold-300 font-cinzel">Sequential Ceremonies</span>
+                <h3 class="font-cinzel text-3xl md:text-4xl text-gold-100 font-extrabold">Wedding Festivities</h3>
+                <p class="text-xs text-gold-100/80 font-medium pt-1">Swipe or tap side petals to fan the 3D card deck</p>
+            </div>
+
+            <!-- Petal Swatches Bar -->
+            <div class="flex flex-wrap justify-center gap-2 mb-10">
+                <button onclick="setActivePetal(0)" class="deck-btn active px-3.5 py-1.5 rounded-full border border-gold-500 text-xs font-bold bg-gold-500 text-plum-950 transition-all shadow-md">1. Mata Pujan</button>
+                <button onclick="setActivePetal(1)" class="deck-btn px-3.5 py-1.5 rounded-full border border-gold-500 text-xs font-bold bg-plum-900 text-gold-100 transition-all shadow-md">2. Haldi</button>
+                <button onclick="setActivePetal(2)" class="deck-btn px-3.5 py-1.5 rounded-full border border-gold-500 text-xs font-bold bg-plum-900 text-gold-100 transition-all shadow-md">3. Mehendi</button>
+                <button onclick="setActivePetal(3)" class="deck-btn px-3.5 py-1.5 rounded-full border border-gold-500 text-xs font-bold bg-plum-900 text-gold-100 transition-all shadow-md">4. Sangeet</button>
+                <button onclick="setActivePetal(4)" class="deck-btn px-3.5 py-1.5 rounded-full border border-gold-500 text-xs font-bold bg-plum-900 text-gold-100 transition-all shadow-md">5. Baraat & Pheras</button>
+            </div>
+
+            <!-- 3D Layered Blooming Petal Deck Container -->
+            <div class="petal-deck-container" id="petalDeck">
+                
+                <!-- Petal Card 1: Mata Pujan -->
+                <div class="petal-card" data-index="0" data-pos="0" onclick="setActivePetal(0)">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between border-b border-gold-500/40 pb-3">
+                            <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-gold-100 text-plum-900 border border-gold-500/50">
+                                Family Ritual | Beige
+                            </span>
+                            <div class="w-10 h-10 rounded-full bg-plum-100 text-plum-800 flex items-center justify-center border border-gold-500">
+                                <i class="fas fa-pray text-lg"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-cinzel text-2xl md:text-3xl font-bold text-plum-900">Mata Pujan</h4>
+                        <p class="text-xs font-bold text-plum-800 flex items-center gap-2">
+                            <i class="far fa-clock text-gold-700"></i> Family Ritual • Auspicious Morning
+                        </p>
+                        <p class="text-xs font-bold text-espresso-900 flex items-center gap-2">
+                            <i class="fas fa-home text-gold-700"></i> Family Residence
+                        </p>
+                        <p class="text-xs text-espresso-800 font-medium leading-relaxed pt-1">
+                            Invoking divine blessings for health, prosperity, and eternal marital bliss prior to starting official ceremonies.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-gold-500/40 text-[11px] font-bold">
+                        <span class="text-espresso-800 uppercase tracking-wider">Dress Code: Traditional</span>
+                        <div class="w-6 h-6 rounded-full border border-gold-500 shadow-inner" style="background-color: #F5F5DC;"></div>
+                    </div>
+                </div>
+
+                <!-- Petal Card 2: Haldi -->
+                <div class="petal-card" data-index="1" data-pos="1" onclick="setActivePetal(1)">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between border-b border-gold-500/40 pb-3">
+                            <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-yellow-100 text-yellow-900 border border-yellow-500/50">
+                                Morning Ceremony | Yellow
+                            </span>
+                            <div class="w-10 h-10 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center border border-yellow-500">
+                                <i class="fas fa-sun text-lg"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-cinzel text-2xl md:text-3xl font-bold text-plum-900">Haldi Ceremony</h4>
+                        <p class="text-xs font-bold text-plum-800 flex items-center gap-2">
+                            <i class="far fa-clock text-gold-700"></i> Morning Celebration
+                        </p>
+                        <p class="text-xs font-bold text-espresso-900 flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-gold-700"></i> Panchouli Mesra, Ranchi
+                        </p>
+                        <p class="text-xs text-espresso-800 font-medium leading-relaxed pt-1">
+                            Blessing the couple with fragrant turmeric paste, vibrant dhol beats, laughter, and floral showers.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-gold-500/40 text-[11px] font-bold">
+                        <span class="text-espresso-800 uppercase tracking-wider">Dress Code: Wear Yellow</span>
+                        <div class="w-6 h-6 rounded-full border border-gold-500 shadow-inner" style="background-color: #FFD700;"></div>
+                    </div>
+                </div>
+
+                <!-- Petal Card 3: Mehendi -->
+                <div class="petal-card" data-index="2" data-pos="2" onclick="setActivePetal(2)">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between border-b border-gold-500/40 pb-3">
+                            <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-emerald-100 text-emerald-900 border border-emerald-500/50">
+                                Afternoon Celebration | Green
+                            </span>
+                            <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center border border-emerald-500">
+                                <i class="fas fa-leaf text-lg"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-cinzel text-2xl md:text-3xl font-bold text-plum-900">Mehendi Ceremony</h4>
+                        <p class="text-xs font-bold text-plum-800 flex items-center gap-2">
+                            <i class="far fa-clock text-gold-700"></i> Afternoon Gala
+                        </p>
+                        <p class="text-xs font-bold text-espresso-900 flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-gold-700"></i> Panchouli Mesra, Ranchi
+                        </p>
+                        <p class="text-xs text-espresso-800 font-medium leading-relaxed pt-1">
+                            Adorning hands with detailed henna motifs accompanied by folk melodies and festive joy.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-gold-500/40 text-[11px] font-bold">
+                        <span class="text-espresso-800 uppercase tracking-wider">Dress Code: Wear Green</span>
+                        <div class="w-6 h-6 rounded-full border border-gold-500 shadow-inner" style="background-color: #2E8B57;"></div>
+                    </div>
+                </div>
+
+                <!-- Petal Card 4: Sangeet -->
+                <div class="petal-card" data-index="3" data-pos="-2" onclick="setActivePetal(3)">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between border-b border-gold-500/40 pb-3">
+                            <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-purple-100 text-purple-900 border border-purple-500/50">
+                                Evening Gala | Purple & Pink
+                            </span>
+                            <div class="w-10 h-10 rounded-full bg-purple-100 text-purple-700 flex items-center justify-center border border-purple-500">
+                                <i class="fas fa-music text-lg"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-cinzel text-2xl md:text-3xl font-bold text-plum-900">Sangeet Night</h4>
+                        <p class="text-xs font-bold text-plum-800 flex items-center gap-2">
+                            <i class="far fa-clock text-gold-700"></i> Evening Celebration
+                        </p>
+                        <p class="text-xs font-bold text-espresso-900 flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-gold-700"></i> Panchouli Mesra, Ranchi
+                        </p>
+                        <p class="text-xs text-espresso-800 font-medium leading-relaxed pt-1">
+                            A musical night packed with choreographed family dance performances, DJ beats, and dinner.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-gold-500/40 text-[11px] font-bold">
+                        <span class="text-espresso-800 uppercase tracking-wider">Dress Code: Indo-Western</span>
+                        <div class="flex gap-1">
+                            <div class="w-5 h-5 rounded-full border border-gold-500 shadow-inner" style="background-color: #800080;"></div>
+                            <div class="w-5 h-5 rounded-full border border-gold-500 shadow-inner" style="background-color: #FF69B4;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Petal Card 5: Baraat & Pheras -->
+                <div class="petal-card" data-index="4" data-pos="-1" onclick="setActivePetal(4)">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between border-b border-gold-500/40 pb-3">
+                            <span class="px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-rose-100 text-rose-900 border border-rose-500/50">
+                                Main Wedding | Red & Gold
+                            </span>
+                            <div class="w-10 h-10 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center border border-rose-500">
+                                <i class="fas fa-fire text-lg"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-cinzel text-2xl md:text-3xl font-bold text-plum-900">Baraat & Pheras</h4>
+                        <p class="text-xs font-bold text-plum-800 flex items-center gap-2">
+                            <i class="far fa-clock text-gold-700"></i> Monday, 07/12/2026 • 12:00 PM
+                        </p>
+                        <p class="text-xs font-bold text-espresso-900 flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt text-gold-700"></i> Panchouli Mesra, Ranchi
+                        </p>
+                        <p class="text-xs text-espresso-800 font-medium leading-relaxed pt-1">
+                            The grand groom procession, varmala garland exchange, and sacred 7 pheras around the holy fire.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-3 border-t border-gold-500/40 text-[11px] font-bold">
+                        <span class="text-espresso-800 uppercase tracking-wider">Dress Code: Festive Red & Gold</span>
+                        <div class="flex gap-1">
+                            <div class="w-5 h-5 rounded-full border border-gold-500 shadow-inner" style="background-color: #B22222;"></div>
+                            <div class="w-5 h-5 rounded-full border border-gold-500 shadow-inner" style="background-color: #D4AF37;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Deck Controls -->
+            <div class="flex justify-center items-center gap-4 mt-8">
+                <button onclick="prevPetalCard()" class="w-11 h-11 rounded-full border-2 border-gold-500 bg-plum-900 text-gold-300 flex items-center justify-center hover:bg-gold-500 hover:text-plum-950 transition shadow-xl cursor-pointer">
+                    <i class="fas fa-chevron-left text-xs"></i>
+                </button>
+                <span id="deckCounter" class="text-xs font-bold text-gold-300 font-cinzel tracking-widest uppercase">
+                    1 of 5
+                </span>
+                <button onclick="nextPetalCard()" class="w-11 h-11 rounded-full border-2 border-gold-500 bg-plum-900 text-gold-300 flex items-center justify-center hover:bg-gold-500 hover:text-plum-950 transition shadow-xl cursor-pointer">
+                    <i class="fas fa-chevron-right text-xs"></i>
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ----------------------------------------------------------- -->
+        <!-- 5. OUR STORY — 3D PERSPECTIVE CAROUSEL                      -->
+        <!-- ----------------------------------------------------------- -->
+        <section id="our-story" class="py-20 px-6 max-w-4xl mx-auto perspective-1500">
+            <div class="text-center mb-10 space-y-1">
+                <span class="text-xs font-extrabold tracking-[0.35em] uppercase text-gold-300 font-cinzel">Cherished Chapters</span>
+                <h3 class="font-cinzel text-3xl md:text-4xl text-gold-100 font-extrabold">Our Story</h3>
+            </div>
+
+            <div class="pearl-card p-4 sm:p-6 rounded-3xl border-2 border-gold-500 shadow-2xl relative overflow-hidden" id="carouselTouchContainer">
+                
+                <!-- Slide Viewport -->
+                <div class="relative h-72 sm:h-96 md:h-[460px] rounded-2xl overflow-hidden bg-plum-950">
+                    <div id="storySlides" class="w-full h-full relative">
+                        
+                        <!-- Slide 1 -->
+                        <div class="story-slide absolute inset-0 opacity-100 transition-opacity duration-1000 flex items-center justify-center">
+                            <img src="IMG_20250921_141323.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/4A0E24/D4AF37?text=Chapter+I';" class="w-full h-full object-cover animate-kenburns" alt="First Meeting">
+                            <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-transparent to-transparent opacity-90"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-gold-100">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-gold-300 font-cinzel">Chapter I</span>
+                                <h5 class="font-cinzel text-xl md:text-2xl font-bold">The Serendipitous Beginning</h5>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="story-slide absolute inset-0 opacity-0 transition-opacity duration-1000 flex items-center justify-center pointer-events-none">
+                            <img src="IMG_20250921_141332.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/4A0E24/D4AF37?text=Chapter+II';" class="w-full h-full object-cover animate-kenburns" alt="Shared Laughter">
+                            <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-transparent to-transparent opacity-90"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-gold-100">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-gold-300 font-cinzel">Chapter II</span>
+                                <h5 class="font-cinzel text-xl md:text-2xl font-bold">Shared Dreams & Smiles</h5>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="story-slide absolute inset-0 opacity-0 transition-opacity duration-1000 flex items-center justify-center pointer-events-none">
+                            <img src="IMG_20250921_141400.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/4A0E24/D4AF37?text=Chapter+III';" class="w-full h-full object-cover animate-kenburns" alt="Family Blessing">
+                            <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-transparent to-transparent opacity-90"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-gold-100">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-gold-300 font-cinzel">Chapter III</span>
+                                <h5 class="font-cinzel text-xl md:text-2xl font-bold">Two Families United</h5>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4 -->
+                        <div class="story-slide absolute inset-0 opacity-0 transition-opacity duration-1000 flex items-center justify-center pointer-events-none">
+                            <img src="IMG_20250921_141603.jpg" onerror="this.onerror=null; this.src='https://placehold.co/800x600/4A0E24/D4AF37?text=Chapter+IV';" class="w-full h-full object-cover animate-kenburns" alt="Forever Union">
+                            <div class="absolute inset-0 bg-gradient-to-t from-plum-950 via-transparent to-transparent opacity-90"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-gold-100">
+                                <span class="text-[10px] font-bold uppercase tracking-widest text-gold-300 font-cinzel">Chapter IV</span>
+                                <h5 class="font-cinzel text-xl md:text-2xl font-bold">Beginning Our Lifetime Voyage</h5>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Slide Controls -->
+                    <button onclick="moveStorySlide(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-plum-950/80 border border-gold-300 text-gold-300 flex items-center justify-center hover:bg-gold-500 hover:text-plum-950 transition">
+                        <i class="fas fa-chevron-left text-xs"></i>
+                    </button>
+                    <button onclick="moveStorySlide(1)" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-plum-950/80 border border-gold-300 text-gold-300 flex items-center justify-center hover:bg-gold-500 hover:text-plum-950 transition">
+                        <i class="fas fa-chevron-right text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Progress Line & Dots -->
+                <div class="mt-4 space-y-3">
+                    <div class="w-full bg-parchment h-1.5 rounded-full overflow-hidden border border-gold-500/40">
+                        <div id="storyProgressBar" class="bg-gold-500 h-full w-0 transition-all duration-300"></div>
+                    </div>
+                    <div class="flex justify-center gap-2.5" id="storyDots">
+                        <span onclick="setStorySlide(0)" class="w-3 h-3 rounded-full bg-plum-900 cursor-pointer"></span>
+                        <span onclick="setStorySlide(1)" class="w-3 h-3 rounded-full bg-gold-500/50 cursor-pointer"></span>
+                        <span onclick="setStorySlide(2)" class="w-3 h-3 rounded-full bg-gold-500/50 cursor-pointer"></span>
+                        <span onclick="setStorySlide(3)" class="w-3 h-3 rounded-full bg-gold-500/50 cursor-pointer"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ----------------------------------------------------------- -->
+        <!-- 6. GRAND RECEPTION & ROUTE MAP                              -->
+        <!-- ----------------------------------------------------------- -->
+        <section id="reception" class="py-20 px-6 max-w-4xl mx-auto perspective-1500">
+            
+            <!-- Reception Feature Card -->
+            <div class="dark-plum-card p-8 md:p-14 rounded-3xl text-center relative overflow-hidden text-gold-100 shadow-2xl border-2 border-gold-500 mb-12">
+                <span class="text-xs font-bold tracking-[0.35em] text-gold-300 font-cinzel uppercase block mb-2">Grand Gala Celebration</span>
+                <h3 class="font-cinzel text-3xl md:text-5xl font-extrabold text-gold-100 mb-4">Wedding Reception</h3>
+
+                <div class="w-24 h-[2px] bg-gold-500 mx-auto mb-6"></div>
+
+                <div class="space-y-4 max-w-lg mx-auto">
+                    <p class="font-cinzel text-2xl md:text-3xl text-gold-300 font-bold">
+                        Monday, 07 December 2026
+                    </p>
+                    <p class="text-xs text-gold-100 uppercase tracking-widest font-bold">
+                        From 05:00 PM Onwards
+                    </p>
+
+                    <div class="py-5 border-y border-gold-500/40 my-6 space-y-1">
+                        <span class="text-[11px] text-gold-300 uppercase tracking-[0.2em] font-bold block font-cinzel">Venue Location</span>
+                        <h4 class="font-cinzel text-3xl font-extrabold text-gold-100">Panchouli</h4>
+                        <p class="text-xs text-gold-300 font-semibold">Neori Vikas, Mesra, Ranchi, Jharkhand</p>
+                    </div>
+
+                    <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gold-300 bg-plum-900/90 text-xs font-bold text-gold-300 shadow">
+                        <i class="fas fa-user-tie"></i> Dress Code: Formal Attire
+                    </div>
+                </div>
+            </div>
+
+            <!-- Route Map Section -->
+            <div class="pearl-card p-6 md:p-8 rounded-3xl border-2 border-gold-500 grid grid-cols-1 md:grid-cols-2 gap-8 items-center shadow-2xl">
+                <!-- Vector Route Map -->
+                <div class="relative h-64 md:h-80 rounded-2xl overflow-hidden border border-gold-500 bg-parchment flex items-center justify-center shadow-inner group">
+                    <svg class="w-full h-full absolute inset-0 opacity-40" viewBox="0 0 400 300" fill="none">
+                        <path d="M0 60 H400 M0 120 H400 M0 180 H400 M0 240 H400" stroke="#5E4C47" stroke-width="1.2"/>
+                        <path d="M60 0 V300 M140 0 V300 M220 0 V300 M300 0 V300" stroke="#5E4C47" stroke-width="1.2"/>
+                        <path d="M 40 240 Q 140 180 220 120 T 340 60" stroke="#6E1F2F" stroke-width="5" stroke-dasharray="8 4" fill="none"/>
+                    </svg>
+
+                    <a href="https://maps.app.goo.gl/UDc8utfTZtm525FUA" target="_blank" rel="noopener noreferrer" class="relative z-10 flex flex-col items-center group-hover:scale-110 transition-transform">
+                        <div class="w-12 h-12 rounded-full bg-plum-900 text-gold-300 flex items-center justify-center shadow-2xl border-2 border-gold-500 animate-bounce">
+                            <i class="fas fa-map-marker-alt text-xl"></i>
+                        </div>
+                        <span class="mt-2 px-3 py-1 rounded-md bg-plum-950 text-gold-100 text-xs font-bold border border-gold-500 shadow font-cinzel">
+                            Panchouli Venue
+                        </span>
+                    </a>
+                </div>
+
+                <!-- Venue Info & Actions -->
+                <div class="space-y-6 text-center md:text-left">
+                    <div class="space-y-2">
+                        <span class="text-xs font-bold text-plum-800 tracking-[0.25em] uppercase font-cinzel">Navigation Details</span>
+                        <h4 class="font-cinzel text-3xl font-extrabold text-plum-900">Panchouli</h4>
+                        <p class="text-xs font-bold text-espresso-900">Neori Vikas, Mesra, Ranchi, Jharkhand</p>
+                        <p class="text-xs text-espresso-800 font-medium leading-relaxed">
+                            Easily accessible via Mesra main road. Click below for real-time turn-by-turn navigation on Google Maps.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 pt-2">
+                        <a href="https://maps.app.goo.gl/UDc8utfTZtm525FUA" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-plum-900 text-gold-100 font-bold text-xs tracking-widest uppercase hover:bg-plum-800 transition shadow-lg flex items-center justify-center gap-2 border border-gold-500 font-cinzel">
+                            <i class="fas fa-location-arrow text-gold-300"></i>
+                            Get Directions
+                        </a>
+
+                        <button onclick="copyAddress()" class="w-full py-3.5 rounded-xl bg-parchment border-2 border-gold-500 text-espresso-900 font-bold text-xs tracking-widest uppercase hover:bg-gold-500 hover:text-plum-950 transition flex items-center justify-center gap-2 font-cinzel cursor-pointer">
+                            <i class="far fa-copy text-gold-700"></i>
+                            Copy Venue Address
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ----------------------------------------------------------- -->
+        <!-- 7. CLOSING & BLESSINGS                                      -->
+        <!-- ----------------------------------------------------------- -->
+        <footer class="py-20 px-6 text-center border-t-2 border-gold-500/40 bg-plum-950 text-gold-100 relative">
+            <div class="max-w-xl mx-auto space-y-6 relative z-10">
+                <div class="w-20 h-20 mx-auto rounded-full bg-plum-900 border-2 border-gold-500 p-3 shadow-xl flex items-center justify-center text-gold-300">
+                    <svg
+						class="w-full h-full drop-shadow-md"
+						viewBox="0 0 100 100"
+						fill="none"
+						aria-label="Minimal Lord Ganesha emblem"
+						role="img">
+						<g fill="none" stroke="#D4AF37" stroke-width="4"
+						   stroke-linecap="round" stroke-linejoin="round">
+							<path d="M39 34 C28 20 14 23 13 39 C12 51 23 59 36 56" />
+							<path d="M61 34 C72 20 86 23 87 39 C88 51 77 59 64 56" />
+							<path d="M35 35 C35 22 42 15 50 15 C58 15 65 22 65 35 C65 54 61 62 56 67" />
+							<path d="M36 57 C31 60 29 66 33 70 C37 73 41 68 42 64" />
+							<path d="M64 57 C69 60 71 66 67 70 C63 73 59 68 58 64" />
+							<path d="M50 49 C50 60 49 66 43 71 C38 75 39 83 47 84 C56 85 63 78 59 71" />
+							<path d="M41 43 Q44 46 47 43 M53 43 Q56 46 59 43" />
+							<path d="M50 23 L50 32 M46 29 Q50 33 54 29" stroke-width="3" />
+						</g>
+					</svg>
+                </div>
+
+                <h3 class="font-cinzel text-3xl md:text-4xl font-extrabold text-gold-100">
+                    We Look Forward To Welcoming You!
+                </h3>
+                
+                <p class="font-script text-3xl text-gold-300 font-normal">
+                    With love,
+                </p>
+
+                <div>
+                    <p class="font-cinzel text-xl font-bold text-gold-100 tracking-wider">
+                        The Mahto & Mahto Families
+                    </p>
+                </div>
+
+                <div class="pt-8 text-[10px] font-bold text-gold-300/80 tracking-[0.3em] uppercase border-t border-gold-500/30 font-cinzel">
+                    Isha Kumari & Ajay Kumar • December 2026
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- ============================================================== -->
+    <!-- JAVASCRIPT LOGIC & 3D INTERACTION ENGINES                      -->
+    <!-- ============================================================== -->
+    <script>
+        // ------------------------------------------------------------------
+        // 1. 3D BLOOMING LOTUS GATE ENGINE
+        // ------------------------------------------------------------------
+        let isAudioPlaying = false;
+        let audioCtx = null;
+
+        function bloomLotusGate() {
+            const gate = document.getElementById('lotusGateOverlay');
+            const main = document.getElementById('mainContent');
+            const body = document.getElementById('bodyElement');
+            const petals = document.querySelectorAll('.lotus-petal');
+
+            // 1. Fan petals outward in 3D
+            petals.forEach((petal, i) => {
+                const angle = i * 45;
+                petal.style.transform = `rotate(${angle}deg) translateY(-220px) rotateX(75deg) scale(0.3)`;
+                petal.style.opacity = '0';
+            });
+
+            // 2. Play Audio
+            playWeddingMusic();
+
+            // 3. Zoom gate container & unlock content
+            setTimeout(() => {
+                gate.classList.add('gate-bloomed');
+                main.classList.remove('opacity-0', 'pointer-events-none');
+                main.classList.add('opacity-100');
+                body.classList.remove('overflow-hidden');
+                body.classList.add('overflow-y-auto');
+            }, 400);
+
+            // 4. Remove gate element after animation
+            setTimeout(() => {
+                gate.style.display = 'none';
+            }, 1400);
+
+            // 5. Confetti Burst
+            fireConfetti();
+        }
+
+        function playWeddingMusic() {
+            const audio = document.getElementById('weddingAudio');
+            audio.volume = 0.65;
+            audio.play().then(() => {
+                isAudioPlaying = true;
+                updateEqualizerUI(true);
+            }).catch(() => {
+                playSynthChimes();
+                isAudioPlaying = true;
+                updateEqualizerUI(true);
+            });
+        }
+
+        function toggleAudio() {
+            const audio = document.getElementById('weddingAudio');
+            if (isAudioPlaying) {
+                audio.pause();
+                if (audioCtx) audioCtx.suspend();
+                isAudioPlaying = false;
+                updateEqualizerUI(false);
+                showToast('Music Paused');
+            } else {
+                playWeddingMusic();
+                if (audioCtx) audioCtx.resume();
+                showToast('Playing Music');
+            }
+        }
+
+        function updateEqualizerUI(playing) {
+            const bars = document.querySelectorAll('#equalizerBars span');
+            bars.forEach(bar => {
+                if (playing) bar.classList.add('animate-pulse');
+                else bar.classList.remove('animate-pulse');
+            });
+        }
+
+        function playSynthChimes() {
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const notes = [261.63, 329.63, 392.00, 523.25, 659.25];
+                let idx = 0;
+                setInterval(() => {
+                    if (!isAudioPlaying || audioCtx.state === 'suspended') return;
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(notes[idx % notes.length], audioCtx.currentTime);
+                    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.4);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + 1.4);
+                    idx++;
+                }, 450);
+            } catch (e) {}
+        }
+
+        // ------------------------------------------------------------------
+        // 2. ORIGAMI 3D SCROLL & COUNTDOWN ENGINE
+        // ------------------------------------------------------------------
+        function toggleOrigamiScroll() {
+            const card = document.getElementById('scrollCard');
+            const chevron = document.getElementById('scrollChevron');
+            
+            card.classList.toggle('scroll-open');
+            if (card.classList.contains('scroll-open')) {
+                chevron.style.transform = 'rotate(180deg)';
+                fireConfetti();
+            } else {
+                chevron.style.transform = 'rotate(0deg)';
+            }
+        }
+
+      //-------------------------------------------------------------
+      // 5. LIVE COUNTDOWN TICKER
+      // -------------------------------------------------------------
+      const targetDate = new Date('December 7, 2026 23:59:59').getTime();
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const difference = targetDate - now;
+
+        if (difference < 0) {
+          // If wedding date passed, display celebratory text
+          document.getElementById('cd-days').innerText = "00";
+          document.getElementById('cd-hours').innerText = "00";
+          document.getElementById('cd-mins').innerText = "00";
+          document.getElementById('cd-secs').innerText = "00";
+          return;
+        }
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+        document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+        document.getElementById('cd-mins').innerText = String(minutes).padStart(2, '0');
+        document.getElementById('cd-secs').innerText = String(seconds).padStart(2, '0');
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+        function addToCalendar(e) {
+            e.stopPropagation();
+            const gCalUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Isha+Kumari+%26+Ajay+Kumar+Wedding&dates=20261207T063000Z/20261207T183000Z&details=Wedding+Ceremony+%26+Celebration+of+Isha+Kumari+%26+Ajay+Kumar.&location=Panchouli+Mesra+Neori+Vikas+Ranchi";
+            window.open(gCalUrl, '_blank');
+        }
+
+        // ------------------------------------------------------------------
+        // 3. 3D STACKED BLOOMING PETAL DECK LOGIC
+        // ------------------------------------------------------------------
+        let currentPetalIdx = 0;
+        const totalPetals = 5;
+
+        function updatePetalDeck() {
+            const cards = document.querySelectorAll('.petal-card');
+            const btns = document.querySelectorAll('.deck-btn');
+            
+            cards.forEach((card, i) => {
+                let pos = i - currentPetalIdx;
+                if (pos < -2) pos += totalPetals;
+                if (pos > 2) pos -= totalPetals;
+
+                card.setAttribute('data-pos', pos);
+            });
+
+            btns.forEach((btn, i) => {
+                if (i === currentPetalIdx) {
+                    btn.className = 'deck-btn active px-3.5 py-1.5 rounded-full border border-gold-500 text-xs font-bold bg-gold-500 text-plum-950 transition-all shadow-md';
+                } else {
+                    btn.className = 'deck-btn px-3.5 py-1.5 rounded-full border border-gold-500 text-xs font-bold bg-plum-900 text-gold-100 transition-all shadow-md';
+                }
+            });
+
+            document.getElementById('deckCounter').innerText = `${currentPetalIdx + 1} of ${totalPetals}`;
+        }
+
+        function setActivePetal(idx) {
+            currentPetalIdx = idx;
+            updatePetalDeck();
+        }
+
+        function prevPetalCard() {
+            currentPetalIdx = (currentPetalIdx - 1 + totalPetals) % totalPetals;
+            updatePetalDeck();
+        }
+
+        function nextPetalCard() {
+            currentPetalIdx = (currentPetalIdx + 1) % totalPetals;
+            updatePetalDeck();
+        }
+
+        // Touch Swipe on Petal Deck
+        let deckTouchStartX = 0;
+        const deckContainer = document.getElementById('petalDeck');
+        deckContainer.addEventListener('touchstart', (e) => {
+            deckTouchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        deckContainer.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].screenX;
+            if (deckTouchStartX - endX > 40) nextPetalCard();
+            else if (endX - deckTouchStartX > 40) prevPetalCard();
+        }, { passive: true });
+
+        // ------------------------------------------------------------------
+        // 4. STORY 3D CAROUSEL ENGINE
+        // ------------------------------------------------------------------
+        let storyIdx = 0;
+        const storySlides = document.querySelectorAll('.story-slide');
+        let storyTimer = null;
+
+        function showStorySlide(idx) {
+            storySlides.forEach((slide, i) => {
+                if (i === idx) {
+                    slide.classList.remove('opacity-0', 'pointer-events-none');
+                    slide.classList.add('opacity-100');
+                } else {
+                    slide.classList.remove('opacity-100');
+                    slide.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+
+            const dots = document.querySelectorAll('#storyDots span');
+            dots.forEach((dot, i) => {
+                dot.className = i === idx ? 'w-3 h-3 rounded-full bg-plum-900 cursor-pointer' : 'w-3 h-3 rounded-full bg-gold-500/50 cursor-pointer';
+            });
+
+            const pb = document.getElementById('storyProgressBar');
+            if (pb) {
+                pb.style.width = '0%';
+                setTimeout(() => { pb.style.width = '100%'; }, 50);
+            }
+        }
+
+        function moveStorySlide(dir) {
+            storyIdx = (storyIdx + dir + storySlides.length) % storySlides.length;
+            showStorySlide(storyIdx);
+            resetStoryTimer();
+        }
+
+        function setStorySlide(idx) {
+            storyIdx = idx;
+            showStorySlide(storyIdx);
+            resetStoryTimer();
+        }
+
+        function startStoryTimer() {
+            storyTimer = setInterval(() => {
+                storyIdx = (storyIdx + 1) % storySlides.length;
+                showStorySlide(storyIdx);
+            }, 5000);
+        }
+
+        function resetStoryTimer() {
+            clearInterval(storyTimer);
+            startStoryTimer();
+        }
+
+        startStoryTimer();
+
+        // ------------------------------------------------------------------
+        // 5. UTILITY FUNCTIONS: TOAST, COPY, CANVAS PETALS
+        // ------------------------------------------------------------------
+        function copyAddress() {
+            const fullAddress = "Panchouli, Neori Vikas, Mesra, Ranchi, Jharkhand - Isha Kumari & Ajay Kumar Wedding";
+            const textarea = document.createElement('textarea');
+            textarea.value = fullAddress;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+
+            showToast("Venue Address Copied!");
+            fireConfetti();
+        }
+
+        function showToast(msg) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'px-4 py-3 rounded-xl pearl-card text-xs font-bold text-plum-900 shadow-2xl border border-gold-500 pointer-events-auto transition-all duration-300 transform translate-y-2';
+            toast.innerHTML = `<i class="fas fa-check-circle text-gold-700 mr-2 text-sm"></i> ${msg}`;
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function fireConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 50,
+                    spread: 80,
+                    origin: { y: 0.65 },
+                    colors: ['#D4AF37', '#4A0E24', '#6E1F2F', '#FFFDF9']
+                });
+            }
+        }
+
+        // Particle Canvas
+        const canvas = document.getElementById('petalCanvas');
+        const ctx = canvas.getContext('2d');
+        let petals = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class ParticlePetal {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 4 + 2;
+                this.speedY = Math.random() * 0.7 + 0.3;
+                this.speedX = Math.sin(Math.random() * Math.PI) * 0.4;
+                this.opacity = Math.random() * 0.4 + 0.2;
+                this.color = Math.random() > 0.5 ? '#D4AF37' : '#6E1F2F';
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y > canvas.height) {
+                    this.y = -10;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 35; i++) {
+            petals.push(new ParticlePetal());
+        }
+
+        function animateCanvasPetals() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvasPetals);
+        }
+        animateCanvasPetals();
+    </script>
+</body>
+</html>
